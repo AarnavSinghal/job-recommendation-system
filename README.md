@@ -1,5 +1,5 @@
 # Job Recommendation System
 
-> **Status:** Skeleton created
+> **Status:** In Progress
 
 

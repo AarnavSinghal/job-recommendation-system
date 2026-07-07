@@ -1,1 +1,40 @@
-# docker-compose.yml
+services:
+  backend:
+    build: ./backend
+    container_name: job-matcher-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - matcher-net
+
+  frontend:
+    build: ./frontend
+    container_name: job-matcher-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - matcher-net
+
+  info:
+    image: busybox
+    container_name: job-matcher-info
+    depends_on:
+      - frontend
+      - backend
+    command: >
+      sh -c "sleep 3 &&
+      echo '' &&
+      echo '==============================================' &&
+      echo '  Job Recommendation System is running!' &&
+      echo '' &&
+      echo '  Open the app:      http://localhost:3000' &&
+      echo '  API docs (Swagger): http://localhost:8000/docs' &&
+      echo '=============================================='"
+    networks:
+      - matcher-net
+
+networks:
+  matcher-net:
+    driver: bridge
