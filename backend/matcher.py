@@ -155,6 +155,11 @@ def match_jobs(candidate: dict, jobs: pd.DataFrame, top_n: int = 10) -> list[dic
     """
     filtered = apply_filters(jobs, candidate)
 
+    max_level = EXPERIENCE_ORDER[candidate["experience_level"]] + 1
+    filtered = filtered[
+        filtered["experience_level"].map(EXPERIENCE_ORDER) <= max_level
+    ]
+
     if filtered.empty:
         return []
 
