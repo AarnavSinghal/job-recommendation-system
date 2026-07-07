@@ -117,9 +117,9 @@ To stop: `Ctrl+C`, then `docker compose down`.
    each showing:
    - the match percentage and a colored progress bar,
    - job details (country, industry, work mode, company size, salary),
-   - ✔ what matched and ✘ where the gaps are.
+   - what matched and where the gaps are.
 
-**Example to try:** Data Scientist · LLM · Entry · country India — returns
+**Example to try:** Data Scientist · LLM · Entry · country India  returns
 perfect 100% matches. Then set minimum salary to 150000 to see partial
 matches with visible gaps.
 
