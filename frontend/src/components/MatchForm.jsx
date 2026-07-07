@@ -1,4 +1,4 @@
-// Candidate input form
+// Candidate input form 
 // Required: role, specialization, experience.
 // Optional: country, industry, work mode, min salary.
 import { useState } from "react";
@@ -31,55 +31,70 @@ function MatchForm({ options, onSearch, loading }) {
     onSearch(payload);
   }
 
-  const selectStyle = { display: "block", width: "100%", padding: 8, marginBottom: 12 };
-
   return (
-    <div>
-      <label>Job role *</label>
-      <select style={selectStyle} value={form.job_role} onChange={(e) => update("job_role", e.target.value)}>
-        {options.job_roles.map((r) => <option key={r}>{r}</option>)}
-      </select>
+    <div className="form-grid">
+      <div className="field">
+        <label>Job role *</label>
+        <select value={form.job_role} onChange={(e) => update("job_role", e.target.value)}>
+          {options.job_roles.map((r) => <option key={r}>{r}</option>)}
+        </select>
+      </div>
 
-      <label>AI specialization *</label>
-      <select style={selectStyle} value={form.ai_specialization} onChange={(e) => update("ai_specialization", e.target.value)}>
-        {options.specializations.map((s) => <option key={s}>{s}</option>)}
-      </select>
+      <div className="field">
+        <label>AI specialization *</label>
+        <select value={form.ai_specialization} onChange={(e) => update("ai_specialization", e.target.value)}>
+          {options.specializations.map((s) => <option key={s}>{s}</option>)}
+        </select>
+      </div>
 
-      <label>Experience level *</label>
-      <select style={selectStyle} value={form.experience_level} onChange={(e) => update("experience_level", e.target.value)}>
-        {options.experience_levels.map((l) => <option key={l}>{l}</option>)}
-      </select>
+      <div className="field">
+        <label>Experience level *</label>
+        <select value={form.experience_level} onChange={(e) => update("experience_level", e.target.value)}>
+          {options.experience_levels.map((l) => <option key={l}>{l}</option>)}
+        </select>
+      </div>
 
-      <label>Country (optional)</label>
-      <select style={selectStyle} value={form.country} onChange={(e) => update("country", e.target.value)}>
-        <option value="">Any</option>
-        {options.countries.map((c) => <option key={c}>{c}</option>)}
-      </select>
+      <div className="form-divider">Optional filters</div>
 
-      <label>Industry</label>
-      <select style={selectStyle} value={form.industry} onChange={(e) => update("industry", e.target.value)}>
-        <option value="">Any</option>
-        {options.industries.map((i) => <option key={i}>{i}</option>)}
-      </select>
+      <div className="field">
+        <label>Country <span className="optional">(optional)</span></label>
+        <select value={form.country} onChange={(e) => update("country", e.target.value)}>
+          <option value="">Any</option>
+          {options.countries.map((c) => <option key={c}>{c}</option>)}
+        </select>
+      </div>
 
-      <label>Work mode</label>
-      <select style={selectStyle} value={form.work_mode} onChange={(e) => update("work_mode", e.target.value)}>
-        <option value="">Any</option>
-        {options.work_modes.map((w) => <option key={w}>{w}</option>)}
-      </select>
+      <div className="field">
+        <label>Industry <span className="optional">(optional)</span></label>
+        <select value={form.industry} onChange={(e) => update("industry", e.target.value)}>
+          <option value="">Any</option>
+          {options.industries.map((i) => <option key={i}>{i}</option>)}
+        </select>
+      </div>
 
-      <label>Salary (USD)</label>
-      <input
-        style={selectStyle}
-        type="number"
-        placeholder="e.g. 50000"
-        value={form.min_salary}
-        onChange={(e) => update("min_salary", e.target.value)}
-      />
+      <div className="field">
+        <label>Work mode <span className="optional">(optional)</span></label>
+        <select value={form.work_mode} onChange={(e) => update("work_mode", e.target.value)}>
+          <option value="">Any</option>
+          {options.work_modes.map((w) => <option key={w}>{w}</option>)}
+        </select>
+      </div>
 
-      <button onClick={handleSubmit} disabled={loading} style={{ padding: "10px 24px", fontSize: 16 }}>
-        {loading ? "Searching…" : "Find matching jobs"}
-      </button>
+      <div className="field">
+        <label>Minimum salary (USD) <span className="optional">(optional)</span></label>
+        <input
+          type="number"
+          placeholder="e.g. 50000"
+          value={form.min_salary}
+          onChange={(e) => update("min_salary", e.target.value)}
+        />
+      </div>
+
+      <div className="submit-row">
+        <button className="submit-btn" onClick={handleSubmit} disabled={loading}>
+          {loading ? "Searching…" : "Find matching jobs"}
+        </button>
+      </div>
     </div>
   );
 }
