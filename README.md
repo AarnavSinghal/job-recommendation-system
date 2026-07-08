@@ -2,7 +2,7 @@
 
 A web application that recommends AI/data jobs based on a candidate's preferences. The user selects their desired job role, AI specialization and experience level  plus optional filters like country, industry, work mode and minimum salary and gets back their top 10 matching jobs, each with a match percentage, what matched, and where the gaps are.
 
-📄 **Documentation:** [Installation Guide](INSTALLATION.md) · [User Manual](USER_MANUAL.md)
+ **Documentation:** [Installation Guide](INSTALLATION.md) · [User Manual](USER_MANUAL.md) · [API Documentation](API_DOCUMENT.md)
 
 ## Why I chose this project
 
