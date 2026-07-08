@@ -2,6 +2,8 @@
 
 A web application that recommends AI/data jobs based on a candidate's preferences. The user selects their desired job role, AI specialization and experience level  plus optional filters like country, industry, work mode and minimum salary and gets back their top 10 matching jobs, each with a match percentage, what matched, and where the gaps are.
 
+📄 **Documentation:** [Installation Guide](INSTALLATION.md) · [User Manual](USER_MANUAL.md)
+
 ## Why I chose this project
 
 As a fresh graduate applying for data science roles, job searching is a problem I dealt with every day. Most job boards only filter results and they don't explain why a job fits me or where I fall short. This project scores every job against the candidate's preferences and qualifications and shows the reasoning behind each match, what the matched criteria was and what the gaps were, which makes the results more useful than just a plain filtered list.
@@ -124,6 +126,11 @@ To stop: `Ctrl+C`, then `docker compose down`.
 ├── api.js             # backend API calls
 
 └── index.css          # custom styling
+├── README.md
+
+├── INSTALLATION.md           # setup steps and troubleshooting
+
+├── USER_MANUAL.md            # how to use the app
 
 ## How to use
 
