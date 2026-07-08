@@ -12,6 +12,10 @@ What is special about it:
 - **Realistic eligibility** — jobs requiring experience more than one level above the candidate are excluded entirely, because the candidate
   cannot realistically apply to them. Applying one level up is allowed and scored with partial credit.
 - **Honest scoring** — optional filters do not distort the match percentage, they only narrow which jobs are considered.
+- **ML salary estimation** — a RandomForest regression model (trained on
+  an 80/20 split of the dataset) estimates the market salary for each
+  job's attributes, and every result shows whether the posting pays
+  above or below that estimate.
 
 ## How matching works
 
@@ -24,6 +28,24 @@ Each eligible job is scored with a weighted formula:
 | Experience level | 20% | Exact = 1, one level apart = 0.5, further = 0 |
 
 Experience level is ordinal (Entry < Mid < Senior < Lead), so a candidate one level away from a role still gets partial credit. Jobs more than one level **above** the candidate are filtered out before scoring (eligibility rule). Optional filters (country, industry, work mode, minimum salary) are applied before scoring. Results are ranked by match percentage, with salary as the tie-breaker.
+
+
+## ML salary estimation
+
+Matching itself is rule-based by design — the dataset contains job
+postings only, with no application or hiring outcomes, so there is no
+label a matching model could be trained on. Salary, however, is a real
+observed target, so a supervised model is used there:
+
+- **Model:** RandomForestRegressor (50 trees, max depth 12)
+- **Features:** role, specialization, experience level, country,
+  industry, company size, work mode (one-hot encoded)
+- **Evaluation:** 80/20 train/test split — MAE ≈ $11,000, R² = 0.887
+  (live metrics at http://localhost:8000/model-info)
+- The model trains at startup from the bundled dataset, so the repo
+  stays free of binary model files and the pipeline is fully
+  reproducible. The first request after startup takes ~30 seconds
+  while training completes.
 
 ## Dataset
 
@@ -48,9 +70,10 @@ loaded by the backend. Per the project specification, a separate database
 container is optional; it was not needed here since no data is written or
 updated at runtime.
 
+
 ## Tech stack
 
-- **Backend:** Python, FastAPI, pandas, Pydantic
+- **Backend:** Python, FastAPI, pandas, Pydantic, scikit-learn
 - **Frontend:** React (Vite), plain fetch API, CSS
 - **Deployment:** Docker Compose
 
