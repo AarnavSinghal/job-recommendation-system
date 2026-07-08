@@ -89,7 +89,10 @@ function App() {
                 <span className="tag">{job.industry}</span>
                 <span className="tag">{job.work_mode}</span>
                 <span className="tag">{job.company_size}</span>
-                <span className="tag salary">${job.salary_usd.toLocaleString()}</span>
+                <span className="tag">
+                  Market est. ${job.salary_estimate.toLocaleString()}
+                  {" "}({job.salary_vs_market >= 0 ? "+" : ""}{job.salary_vs_market}%)
+                </span>
               </div>
 
               <div className="reasons">

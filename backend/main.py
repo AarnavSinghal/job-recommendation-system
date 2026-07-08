@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from data_loader import load_jobs, get_form_options
 from matcher import match_jobs
 
+from ml_model import estimate_salary, get_model
 app = FastAPI(title="Job Recommendation System API")
 
 # Allows the frontend to call this API
@@ -43,7 +44,18 @@ def options():
 
 @app.post("/match")
 def match(candidate: CandidateRequest):
-    """Return top 10 matching jobs for the candidate"""
+    """Return top 10 matching jobs with ML salary estimates."""
     jobs = load_jobs()
     results = match_jobs(candidate.model_dump(), jobs, top_n=10)
+    for job in results:
+        est = estimate_salary(job)
+        job["salary_estimate"] = est
+        job["salary_vs_market"] = round((job["salary_usd"] - est) / est * 100)
     return {"count": len(results), "results": results}
+
+
+@app.get("/model-info")
+def model_info():
+    """Model evaluation metrics on the held-out test set."""
+    _, _, metrics = get_model()
+    return metrics
