@@ -150,7 +150,12 @@ To stop: `Ctrl+C`, then `docker compose down`.
    - what matched and where the gaps are.
 
 **Example to try:** Data Scientist · LLM · Entry · country India  returns
-perfect 100% matches. Then set minimum salary to 150000 to see partial
+perfect 100% matches. Then set minimum salary to 50000 to see partial
 matches with visible gaps.
 
 If no jobs are found, relax the filters (usually the minimum salary).
+<img width="2938" height="1594" alt="Screenshot 2026-07-16 at 17 42 57" src="https://github.com/user-attachments/assets/1199effa-d9d1-4048-9563-327ef3f03a59" />
+
+<img width="2939" height="1596" alt="Screenshot 2026-07-16 at 18 01 55" src="https://github.com/user-attachments/assets/935d36d3-74a6-4fc5-bf5e-24c59d4bba7a" />
+
+
