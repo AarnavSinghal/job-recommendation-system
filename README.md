@@ -34,7 +34,7 @@ Experience level is ordinal (Entry < Mid < Senior < Lead), so a candidate one le
 
 ## ML salary estimation
 
-Matching itself is rule-based by design — the dataset contains job
+Matching itself is rule-based by design. The dataset contains job
 postings only, with no application or hiring outcomes, so there is no
 label a matching model could be trained on. Salary, however, is a real
 observed target, so a supervised model is used there:
